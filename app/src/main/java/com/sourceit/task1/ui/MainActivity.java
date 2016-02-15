@@ -106,11 +106,27 @@ public class MainActivity extends AppCompatActivity {
         iff.addAction(States.GPS_STRING);
         iff.addAction(States.BLUETOOTH_STRING);
         LocalBroadcastManager.getInstance(this).registerReceiver(localReceiver, iff);
+        changeSetAll();
+    }
+
+    private void changeSet(int key, boolean value) {
+        broadcasterModels.get(key).setState(value);
         broadcasters.getAdapter().notifyDataSetChanged();
     }
 
-    void changeSet(int key, boolean value) {
-        broadcasterModels.get(key).setState(value);
+    private void changeSetAll() {
+        if (broadcasterModels.get(States.AIR_MODE).getState() != States.states[States.AIR_MODE]) {
+            broadcasterModels.get(States.AIR_MODE).setState(States.states[States.AIR_MODE]);
+        }
+        if (broadcasterModels.get(States.WI_FI).getState() != States.states[States.WI_FI]) {
+            broadcasterModels.get(States.WI_FI).setState(States.states[States.WI_FI]);
+        }
+        if (broadcasterModels.get(States.GPS).getState() != States.states[States.GPS]) {
+            broadcasterModels.get(States.GPS).setState(States.states[States.GPS]);
+        }
+        if (broadcasterModels.get(States.BLUETOOTH).getState() != States.states[States.BLUETOOTH]) {
+            broadcasterModels.get(States.BLUETOOTH).setState(States.states[States.BLUETOOTH]);
+        }
         broadcasters.getAdapter().notifyDataSetChanged();
     }
 
