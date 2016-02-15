@@ -5,6 +5,11 @@ package com.sourceit.task1.ui;
  */
 public class States {
 
+    public static final String WIFI_STRING = "WI-FI";
+    public static final String GPS_STRING = "GPS";
+    public static final String AIR_STRING = "AIR";
+    public static final String BLUETOOTH_STRING = "BLUETOOTH";
+
     public static final int WI_FI = 0;
     public static final int BLUETOOTH = 1;
     public static final int GPS = 2;

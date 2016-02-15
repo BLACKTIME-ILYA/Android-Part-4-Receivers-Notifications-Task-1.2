@@ -69,10 +69,10 @@ public class MainActivity extends AppCompatActivity {
             States.states[States.AIR_MODE] = States.OFF;
         }
 
-        BroadcasterModel broadcasterModel_wifi = new BroadcasterModel("WI-FI", States.states[States.WI_FI]);
-        BroadcasterModel broadcasterModel_bluetooth = new BroadcasterModel("Bluetooth", States.states[States.BLUETOOTH]);
-        BroadcasterModel broadcasterModel_gps = new BroadcasterModel("GPS", States.states[States.GPS]);
-        BroadcasterModel broadcasterModel_airmode = new BroadcasterModel("AIR MODE", States.states[States.AIR_MODE]);
+        BroadcasterModel broadcasterModel_wifi = new BroadcasterModel(States.WIFI_STRING, States.states[States.WI_FI]);
+        BroadcasterModel broadcasterModel_bluetooth = new BroadcasterModel(States.BLUETOOTH_STRING, States.states[States.BLUETOOTH]);
+        BroadcasterModel broadcasterModel_gps = new BroadcasterModel(States.GPS_STRING, States.states[States.GPS]);
+        BroadcasterModel broadcasterModel_airmode = new BroadcasterModel(States.AIR_STRING, States.states[States.AIR_MODE]);
         broadcasterModels.add(broadcasterModel_wifi);
         broadcasterModels.add(broadcasterModel_bluetooth);
         broadcasterModels.add(broadcasterModel_gps);
@@ -101,10 +101,10 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         L.d("resume");
         IntentFilter iff = new IntentFilter();
-        iff.addAction("air");
-        iff.addAction("wifi");
-        iff.addAction("gps");
-        iff.addAction("bluetooth");
+        iff.addAction(States.AIR_STRING);
+        iff.addAction(States.WIFI_STRING);
+        iff.addAction(States.GPS_STRING);
+        iff.addAction(States.BLUETOOTH_STRING);
         LocalBroadcastManager.getInstance(this).registerReceiver(localReceiver, iff);
         broadcasters.getAdapter().notifyDataSetChanged();
     }
@@ -118,14 +118,14 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
             L.d("local receive");
-            if (intent.getAction().equals("air")) {
+            if (intent.getAction().equals(States.AIR_STRING)) {
                 L.d("air mode");
                 changeSet(States.AIR_MODE, States.states[States.AIR_MODE]);
-            } else if (intent.getAction().equals("wifi")) {
+            } else if (intent.getAction().equals(States.WIFI_STRING)) {
                 changeSet(States.WI_FI, States.states[States.WI_FI]);
-            } else if (intent.getAction().equals("bluetooth")) {
+            } else if (intent.getAction().equals(States.BLUETOOTH_STRING)) {
                 changeSet(States.BLUETOOTH, States.states[States.BLUETOOTH]);
-            } else if (intent.getAction().equals("gps")) {
+            } else if (intent.getAction().equals(States.GPS_STRING)) {
                 changeSet(States.GPS, States.states[States.GPS]);
             }
         }
