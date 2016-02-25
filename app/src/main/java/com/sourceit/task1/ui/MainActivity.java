@@ -45,11 +45,13 @@ public class MainActivity extends AppCompatActivity {
         }
 
         BluetoothAdapter bluetooth = BluetoothAdapter.getDefaultAdapter();
-        L.d("bluetooth : " + bluetooth.isEnabled());
-        if (bluetooth.isEnabled()) {
-            States.states[States.BLUETOOTH] = States.ON;
-        } else {
-            States.states[States.BLUETOOTH] = States.OFF;
+        if (bluetooth != null) {
+            L.d("bluetooth : " + bluetooth.isEnabled());
+            if (bluetooth.isEnabled()) {
+                States.states[States.BLUETOOTH] = States.ON;
+            } else {
+                States.states[States.BLUETOOTH] = States.OFF;
+            }
         }
 
         WifiManager wifi = (WifiManager) getSystemService(Context.WIFI_SERVICE);
